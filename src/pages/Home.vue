@@ -5,10 +5,10 @@
                 <h1>AGENDA</h1>
             </div>
             <div class="col-span-1 text-white w-full h-80 border border-gray-300 rounded-lg flex items-center justify-center">
-                <h1>ABSENCES</h1>
+                <h1>NOTES</h1>
             </div>
             <div class="col-span-1 text-white w-full h-80 border border-gray-300 rounded-lg flex items-center justify-center">
-                <h1>NOTES</h1>
+                <h1>NEWS</h1>
             </div>
         </div>
         <div class="flex space-x-4 w-4/5">

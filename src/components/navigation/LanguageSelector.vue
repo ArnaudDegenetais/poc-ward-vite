@@ -69,7 +69,6 @@ const languages = [
 ]
 const selectedLanguage = ref(languages[0])
 const { locale, availableLocales } = useI18n()
-console.log('availableLocales : ', availableLocales)
 const setLocale = (language) => {
     locale.value = language.value
     selectedLanguage.value = language

@@ -4,11 +4,11 @@
             <router-link class="text-white text-lg font-bold" to="/">EM Normandie {{ $t('titre.world') }} </router-link>
         </div>
         <div class="flex justify-center items-center space-x-8">
-            <router-link class="" to="/tuto">
+            <router-link class="" to="/">
                 <GGIcons name="menu-grid-o" color="white" />
             </router-link>
             <LanguageSelector />
-            <router-link class="" to="/tuto">
+            <router-link class="" to="/">
               <GGIcons name="comment" color="white" />
             </router-link>
             <ProfilDropDown />

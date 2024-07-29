@@ -6,11 +6,11 @@ const routes = [
         name: 'Home',
         component: () => import('@/pages/Home.vue'),
     },
-    {
-        path: '/tuto',
-        name: 'Tuto',
-        component: () => import('@/pages/Tuto.vue'),
-    },
+    // {
+    //     path: '/tuto',
+    //     name: 'Tuto',
+    //     component: () => import('@/pages/Tuto.vue'),
+    // },
     {
         path: '/agenda',
         name: 'Agenda',

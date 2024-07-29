@@ -9,7 +9,9 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@azure/msal-browser": "^3.20.0",
         "@headlessui/vue": "^1.7.22",
+        "pinia": "^2.2.0",
         "vue": "^3.4.31",
         "vue-css.gg": "^1.0.3",
         "vue-i18n": "^9.13.1",
