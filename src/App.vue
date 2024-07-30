@@ -21,7 +21,7 @@ import { ref, onMounted } from 'vue'
 import { PublicClientApplication } from '@azure/msal-browser';
 import TheTopNavigation from '@/components/navigation/TheTopNavigation.vue'
 import TheLeftNavigation from '@/components/navigation/TheLeftNavigation.vue'
-import msalConfig from '@/auth/azureAuth'
+import {msalConfig, msalInstance} from '@/auth/azureAuth'
 
 const isAuthenticated = ref(false);
 const authError = ref(null);
@@ -35,19 +35,30 @@ const authError = ref(null);
 //   }
 // };
 
-onMounted(() => {
+onMounted( async () => {
   console.log('App.vue mounted');
   console.log(msalConfig);
-    const msalInstance = new PublicClientApplication(msalConfig);
-    // console.log('msalInstance ',msalInstance);
+    console.log('msalInstance ',msalInstance);
+    await msalInstance.initialize() // Call the initialize function
 
-    if (!isAuthenticated.value) {
-        console.log('Not authenticated');
-        // use the signin method from the msalInstance actions to trigger the login process
-        msalConfig.actions.signIn(msalInstance).catch(err => {
-            console.log('Error signing in');
-            authError.value = err;
-        });
+    const loginRequest = {}
+    try {
+      // Check if MSAL is initialized before using it
+      if (!msalInstance) {
+        throw new Error('MSAL not initialized. Call initializeMsal() before using MSAL API.')
+      }
+      await msalInstance.loginPopup(loginRequest)
+      console.log(msalInstance.getAllAccounts());
+    } catch (error) {
+      console.error('Login error:', error)
+    }
+    // if (!isAuthenticated.value) {
+    //     console.log('Not authenticated');
+    //     // use the signin method from the msalInstance actions to trigger the login process
+    //     msalConfig.actions.signIn(msalInstance).catch(err => {
+    //         console.log('Error signing in');
+    //         authError.value = err;
+    //     });
 
 
         // msalConfig.actions.signIn(msalInstance).catch(err => {
@@ -58,6 +69,6 @@ onMounted(() => {
     // signIn(msalInstance).catch(err => {
     //   authError.value = err;
     // });
-  }
+  
 });
 </script>

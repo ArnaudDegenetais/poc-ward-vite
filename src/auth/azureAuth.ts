@@ -5,19 +5,28 @@ import {
     AuthenticationResult,
 } from '@azure/msal-browser'
 
-interface State {
-    msalConfig: {
-        auth: {
-            clientId: string
-            authority: string
-            redirectUri: string
-            postLogoutRedirectUri: string
-            navigateToLoginRequestUrl: boolean
-        }
-        cache: {
-            cacheLocation: string
-        }
+
+export const msalConfig = {
+    auth: {
+        clientId: import.meta.env.VITE_MSAL_CLIENT_ID,
+        authority: import.meta.env.VITE_MSAL_AUTHORITY,
+        redirectUri: import.meta.env.VITE_MSAL_REDIRECT_URI,
+        postLogoutRedirectUri: import.meta.env.VITE_MSAL_REDIRECT_URI,
+        navigateToLoginRequestUrl: true,
+    },
+    cache: {
+      cacheLocation: 'localStorage', // This configures where your cache will be stored
+      storeAuthStateInCookie: false
     }
+  }
+
+
+
+  export const msalInstance = new PublicClientApplication(msalConfig)
+
+  
+interface State {
+    msalConfig: {    }
     account: AccountInfo | null
     roles: string[]
     isAuthenticated: boolean
@@ -31,23 +40,7 @@ export default {
 
     state(): State {
         return {
-            msalConfig: {
-                auth: {
-                    // clientId: import.meta.env.VITE_MSAL_CLIENT_ID || '',
-                    clientId: '428a5edc-6c13-4e2f-8177-f35c5a6e5302',
-                    // authority: import.meta.env.VITE_MSAL_AUTHORITY || '',
-                    authority:
-                        'https://login.microsoftonline.com/dffef3d7-143e-41ed-815d-9c383c48eb95',
-                    // redirectUri: import.meta.env.BASE_URL || '',
-                    redirectUri: 'http://localhost:5173/redirect',
-                    // postLogoutRedirectUri: import.meta.env.BASE_URL || '',
-                    postLogoutRedirectUri: 'http://localhost:5173/redirect',
-                    navigateToLoginRequestUrl: true,
-                },
-                cache: {
-                    cacheLocation: 'localStorage',
-                },
-            },
+            msalConfig: msalConfig,
             account: null,
             roles: [],
             isAuthenticated: false,
@@ -136,7 +129,7 @@ export default {
         },
 
         async signOut({ commit, state }: any) {
-            const msalInstance = new PublicClientApplication(state.msalConfig)
+            const msalInstance = new PublicClientApplication(msalConfig)
 
             const logoutRequest = {
                 account: msalInstance.getAccountByHomeId(
