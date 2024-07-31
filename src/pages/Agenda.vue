@@ -1,3 +1,9 @@
 <template>
-    <h1 class="text-white">AGENDA</h1>
+    <DatePicker />
+    <Calendar />
 </template>
+
+<script setup>
+import DatePicker from '@/components/agenda/DatePicker.vue';
+import Calendar from '@/components/agenda/Calendar.vue';
+</script>

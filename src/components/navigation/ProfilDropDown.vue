@@ -22,7 +22,7 @@
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]">
-                  <router-link to="/tuto">Profile</router-link>
+                  {{  }}
                 </button>
               </MenuItem>
               <MenuItem v-slot="{ active }">
@@ -30,7 +30,7 @@
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]">
-                  <router-link to="/tuto">Settings</router-link>
+                  <router-link to="/">Profile</router-link>
                 </button>
               </MenuItem>
               <MenuItem v-slot="{ active }">
@@ -38,7 +38,7 @@
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]">
-                  <router-link to="/tuto">Logout</router-link>
+                  <router-link to="/">Settings</router-link>
                 </button>
               </MenuItem>
               <MenuItem v-slot="{ active }">
@@ -46,7 +46,15 @@
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]">
-                  <router-link to="/tuto">confidentialité</router-link>
+                  <router-link to="/">Logout</router-link>
+                </button>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <button :class="[
+                  active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                ]">
+                  <router-link to="/">confidentialité</router-link>
                 </button>
               </MenuItem>
             </div>

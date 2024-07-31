@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import router from '@/router'
+import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import EN from './i18n/en.json'
 import FR from './i18n/fr.json'
@@ -17,4 +18,6 @@ const i18n = createI18n({
     },
 })
 
-createApp(App).use(router).use(i18n).mount('#app')
+const pinia = createPinia()
+
+createApp(App).use(pinia).use(router).use(i18n).mount('#app')

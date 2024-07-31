@@ -13,6 +13,7 @@
         "@headlessui/vue": "^1.7.22",
         "pinia": "^2.2.0",
         "vue": "^3.4.31",
+        "vue-cal": "^4.9.0",
         "vue-css.gg": "^1.0.3",
         "vue-i18n": "^9.13.1",
         "vue-router": "^4.4.0"
