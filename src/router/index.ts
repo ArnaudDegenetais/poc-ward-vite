@@ -6,11 +6,6 @@ const routes = [
         name: 'Home',
         component: () => import('@/pages/Home.vue'),
     },
-    // {
-    //     path: '/tuto',
-    //     name: 'Tuto',
-    //     component: () => import('@/pages/Tuto.vue'),
-    // },
     {
         path: '/agenda',
         name: 'Agenda',
@@ -25,6 +20,11 @@ const routes = [
         path: '/absences',
         name: 'Absences',
         component: () => import('@/pages/Absences.vue'),
+    },
+    {
+        path: '/news',
+        name: 'News',
+        component: () => import('@/pages/News.vue'),
     },
     // {
     //     path: '/destination/:id/:slug',

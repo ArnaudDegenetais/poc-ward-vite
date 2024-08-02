@@ -11,7 +11,10 @@
     "dependencies": {
         "@azure/msal-browser": "^3.20.0",
         "@headlessui/vue": "^1.7.22",
+        "@tinymce/tinymce-vue": "^6.0.1",
+        "axios": "^1.7.2",
         "pinia": "^2.2.0",
+        "tinymce": "^7.2.1",
         "vue": "^3.4.31",
         "vue-cal": "^4.9.0",
         "vue-css.gg": "^1.0.3",

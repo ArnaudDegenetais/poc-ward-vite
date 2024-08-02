@@ -1,6 +1,6 @@
 <template>
     <div class="h-full">
-        <VueCal hide-view-selector active-view="day" style="color: azure;" />
+        <VueCal hide-view-selector active-view="day" style="color: azure;" xsmall />
     </div>
 </template>
 <script setup>

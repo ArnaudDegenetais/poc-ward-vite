@@ -1,5 +1,5 @@
 <template>
-        <div v-if="isAuthenticated" class="grid grid-rows-12 h-full bg-slate-900">
+        <div v-if="userStore.isAuthenticated" class="grid grid-rows-12 h-full bg-slate-300">
             <div class="row-span-1 col-span-12 z-40">
                 <TheTopNavigation />
             </div>
@@ -29,14 +29,9 @@ import { msalConfig, msalInstance } from '@/auth/azureAuth'
 import { signIn } from '@/auth/authService'
 
 const userStore = useUserStore();
-const isAuthenticated = ref(false);
 // const authError = ref(null);
 
 onMounted( async () => {
-    console.log('App.vue mounted');
-    console.log('isAuthenticated: ', isAuthenticated);
     await signIn();
-    isAuthenticated.value = true;
-    console.log('isAuthenticated: ', isAuthenticated.value);
 });
 </script>

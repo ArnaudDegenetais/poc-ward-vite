@@ -1,3 +1,15 @@
 {
-    "titre": { "world": "the world!" }
+    "titre": { "world": "the world!" },
+    "navigation": {
+        "agenda": "Agenda",
+        "grades": "Grades",
+        "news": "News",
+        "settings": "Settings",
+        "logout": "Logout",
+        "absences": "Absences"
+    },
+    "features": {
+        "news-editor": "News Editor",
+        "rooms-schedule": "Rooms Schedule"
+    }
 }

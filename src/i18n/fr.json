@@ -1,3 +1,15 @@
 {
-    "titre": { "world": "le Monde!" }
+    "titre": { "world": "le Monde!" },
+    "navigation": {
+        "agenda": "Agenda",
+        "grades": "Notes",
+        "news": "News",
+        "settings": "Réglages",
+        "logout": "Déconnexion",
+        "absences": "Absences"
+    },
+    "features": {
+        "news-editor": "Editeur de news",
+        "rooms-schedule": "Planning des salles"
+    }
 }

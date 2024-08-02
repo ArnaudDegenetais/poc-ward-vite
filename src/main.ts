@@ -20,4 +20,4 @@ const i18n = createI18n({
 
 const pinia = createPinia()
 
-createApp(App).use(pinia).use(router).use(i18n).mount('#app')
+createApp(App).use(i18n).use(pinia).use(router).mount('#app')
