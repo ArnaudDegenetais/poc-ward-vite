@@ -8,9 +8,7 @@
                 </router-link>
         </div>
         <div class="flex justify-center items-center space-x-8">
-            <router-link class="" to="/">
-                <GGIcons name="menu-grid-o" color="white" />
-            </router-link>
+            <ExternalAppDropDown />
             <LanguageSelector />
             <router-link class="" to="/">
               <GGIcons name="comment" color="white" />
@@ -26,5 +24,6 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { useI18n } from 'vue-i18n'
 import LanguageSelector from './LanguageSelector.vue'
 import ProfilDropDown from './ProfilDropDown.vue'
+import ExternalAppDropDown from './ExternalAppPopOver.vue'
 const { t } = useI18n() 
 </script>

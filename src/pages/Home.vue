@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto p-10 flex flex-col items-center justify-center min-h-screen space-y-8">
+    <div class="">
     <EmployeeHome v-if="userStore.userRoles.includes('BackOffice.Administrator')" />
     <StudentHome v-else />
     </div>
