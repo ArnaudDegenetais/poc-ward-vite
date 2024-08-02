@@ -101,6 +101,4 @@ const groupeNotesByYear = (notes) => {
 }
 
 const groupedNotes = ref(groupeNotesByYear(notes.value))
-
-console.log(groupedNotes.value)
 </script>

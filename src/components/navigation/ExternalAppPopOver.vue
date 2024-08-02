@@ -18,47 +18,12 @@
             <PopoverPanel
                 class="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl"
             >
-                <div
-                    class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5"
-                >
-                    <div
-                        class="relative grid gap-8 bg-white p-7 lg:grid-cols-2"
-                    >
-                        <a
-                            v-for="item in solutions"
-                            :key="item.name"
-                            :href="item.href"
-                            class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
-                        >
-                            <div
-                                class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-                            >
-                                <div v-html="item.icon"></div>
-                            </div>
-                            <div class="ml-4">
-                                <p class="text-sm font-medium text-gray-900">
-                                    {{ item.name }}
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    {{ item.description }}
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="bg-gray-50 p-4">
-                        <a
-                            href="##"
-                            class="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
-                        >
-                            <span class="flex items-center">
-                                <span class="text-sm font-medium text-gray-900">
-                                    Documentation
-                                </span>
-                            </span>
-                            <span class="block text-sm text-gray-500">
-                                Start integrating products and tools
-                            </span>
-                        </a>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                    <div v-for="element in externalElements" :key="element.id" class="flex items-center p-3 border border-gray-300 rounded-lg bg-white hover:bg-gray-50">
+                        <GGIcons :name="element.icon" color="black" />
+                        <div class="ml-4 text-base font-medium text-gray-900">
+                            {{ element.label }}
+                        </div>
                     </div>
                 </div>
             </PopoverPanel>
@@ -70,4 +35,21 @@
 import { signOut } from '@/auth/authService'
 import { GGIcons } from 'vue-css.gg'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+
+const externalElements = [
+    { id: 1, label: 'Upward', icon: 'comment', path: '/notes' },
+    { id: 2, label: 'Parcours Carrière', icon: 'profile', path: '/profile' },
+    { id: 3, label: 'VM', icon: 'settings', path: '/settings' },
+    { id: 4, label: 'housing', icon: 'logout', path: '/logout' },
+    { id: 5, label: 'GED', icon: 'logout', path: '/confidentialité' },
+    { id: 6, label: 'Mes documents', icon: 'logout', path: '/confidentialité' },
+    {
+        id: 7,
+        label: 'Learning center',
+        icon: 'logout',
+        path: '/confidentialité',
+    },
+    { id: 8, label: 'Job teaser', icon: 'logout', path: '/confidentialité' },
+    { id: 9, label: 'Alumni', icon: 'logout', path: '/confidentialité' },
+]
 </script>
