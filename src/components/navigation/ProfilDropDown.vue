@@ -42,17 +42,20 @@
                 </button>
               </MenuItem>
               <MenuItem v-slot="{ active }">
-                <button :class="[
+                <button
+                :class="[
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]">
-                  <router-link to="/">Logout</router-link>
+                ]"
+                @click="signOut"
+                >
+                  Logout
                 </button>
               </MenuItem>
               <MenuItem v-slot="{ active }">
                 <button :class="[
                   active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                  'group flex w-full items-center rounded-md px-2 py-2 text-xs',
                 ]">
                   <router-link to="/">confidentialité</router-link>
                 </button>
@@ -64,6 +67,8 @@
 </template>
 
 <script setup>
+import { signOut } from '@/auth/authService';
 import { GGIcons } from 'vue-css.gg'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+
 </script>

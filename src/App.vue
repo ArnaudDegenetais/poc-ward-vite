@@ -20,12 +20,10 @@
 <script setup>
 import { useUserStore } from '@/stores/userStore';
 import { ref, onMounted } from 'vue'
-import { PublicClientApplication } from '@azure/msal-browser';
 import DashboardLayout from '@/layout/DashboardLayout.vue';
 import TheTopNavigation from '@/components/navigation/TheTopNavigation.vue'
 import TheLeftNavigation from '@/components/navigation/TheLeftNavigation.vue'
 import HomeLoading from './components/login/HomeLoading.vue';
-import { msalConfig, msalInstance } from '@/auth/azureAuth'
 import { signIn } from '@/auth/authService'
 
 const userStore = useUserStore();

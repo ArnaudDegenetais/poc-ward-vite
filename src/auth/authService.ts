@@ -1,6 +1,29 @@
 import { InteractionRequiredAuthError } from '@azure/msal-browser'
-import { msalInstance } from '@/auth/azureAuth'
+import { msalInstance } from '@/auth/authConfig'
 import { useUserStore } from '@/stores/userStore'
+
+const redirectLogin = async () => {
+    await msalInstance.initialize()
+    const loginRequest = {
+        scopes: [],
+    }
+    return msalInstance
+        .acquireTokenSilent(loginRequest)
+        .then(() => {
+            const accounts = msalInstance.getAllAccounts()
+            msalInstance.setActiveAccount(accounts[0])
+            getAccessToken()
+
+            const userStore = useUserStore()
+            userStore.setAccount(accounts[0])
+            userStore.setUserRoles(accounts[0].idTokenClaims?.roles ?? [])
+            userStore.setIsAuthenticated(true)
+        })
+        .catch((error) => {
+            console.error('Redirect login error:', error)
+            throw new Error(error)
+        })
+}
 
 const signIn = async () => {
     await msalInstance.initialize() // Call the initialize function
@@ -20,16 +43,47 @@ const signIn = async () => {
         const accounts = msalInstance.getAllAccounts()
         msalInstance.setActiveAccount(accounts[0])
         getAccessToken()
+
         const userStore = useUserStore()
         userStore.setIsAuthenticated(true)
         userStore.setUserRoles(accounts[0].idTokenClaims?.roles ?? [])
         userStore.setAccount(accounts[0])
-    } catch (error) {
+    } catch (error: any) {
         console.error('Login error:', error)
+        if (error instanceof InteractionRequiredAuthError) {
+            redirectLogin()
+        } else {
+            throw new Error(error)
+        }
     }
 }
 
-const getAccessToken = () => {
+const signOut = async () => {
+    await msalInstance.initialize()
+
+    const logoutRequest = {
+        account: msalInstance.getActiveAccount(),
+    }
+
+    console.log('Signing out...', logoutRequest)
+
+    return msalInstance
+        .logoutRedirect(logoutRequest)
+        .then(() => {
+            const userStore = useUserStore()
+            userStore.setIsAuthenticated(false)
+            userStore.setUserRoles([])
+            userStore.setAccount(null)
+            userStore.setAccessToken('')
+            localStorage.clear()
+        })
+        .catch((error) => {
+            console.error('Logout error:', error)
+            throw new Error(error)
+        })
+}
+
+const getAccessToken = async () => {
     const tokenRequest = {
         scopes: import.meta.env.VITE_MSAL_SCOPES.split(';'),
     }
@@ -40,13 +94,13 @@ const getAccessToken = () => {
             const userStore = useUserStore()
             userStore.setAccessToken(response.accessToken)
         })
-        .catch((error) => {
+        .catch((error: any) => {
             if (error instanceof InteractionRequiredAuthError) {
-                // dispatch('redirectLogin', msalInstance)
+                redirectLogin()
             } else {
                 throw new Error(error)
             }
         })
 }
 
-export { signIn, getAccessToken }
+export { redirectLogin, signIn, signOut, getAccessToken }
