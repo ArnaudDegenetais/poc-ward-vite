@@ -30,7 +30,7 @@
     </div>
     <div v-else class="mx-auto flex min-h-screen max-w-screen-sm">
         <div
-            class="h-full w-full rounded-lg bg-gradient-to-b from-red-emn-logo via-red-emn-mate to-white-500 p-2"
+            class="h-full w-full rounded-lg bg-gradient-to-b from-red-emn-logo via-red-emn-mate to-white-500 p-2 shadow-emn-global"
         >
             <div class="h-full w-full bg-blue-emn rounded-lg">
                 <div

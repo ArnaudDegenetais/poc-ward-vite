@@ -90,7 +90,7 @@ const getAccessToken = async () => {
     return msalInstance
         .acquireTokenSilent(tokenRequest)
         .then((response) => {
-            // console.log('Access token acquired', response.accessToken)
+            console.log('Access token acquired', response.accessToken)
             const userStore = useUserStore()
             userStore.setAccessToken(response.accessToken)
         })

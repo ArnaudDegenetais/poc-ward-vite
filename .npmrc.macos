@@ -1,0 +1,9 @@
+registry=https://pkgs.dev.azure.com/em-normandie/EmnPlatform/_packaging/ward/npm/registry/                      
+; begin auth token
+//pkgs.dev.azure.com/em-normandie/EmnPlatform/_packaging/ward/npm/registry/:username=apackage
+//pkgs.dev.azure.com/em-normandie/EmnPlatform/_packaging/ward/npm/registry/:_password=N3F5ejRhcjZ6eWgzZW5laHh0ZDZ4NnA2bW9qZm5pYzNqb2h3ZTdmNHpramZycHk2MzNocQ==
+//pkgs.dev.azure.com/em-normandie/EmnPlatform/_packaging/ward/npm/registry/:email=adegenetais@em-normandie.fr
+//pkgs.dev.azure.com/em-normandie/EmnPlatform/_packaging/ward/npm/:username=apackage
+//pkgs.dev.azure.com/em-normandie/EmnPlatform/_packaging/ward/npm/:_password=N3F5ejRhcjZ6eWgzZW5laHh0ZDZ4NnA2bW9qZm5pYzNqb2h3ZTdmNHpramZycHk2MzNocQ==
+//pkgs.dev.azure.com/em-normandie/EmnPlatform/_packaging/ward/npm/:email=adegenetais@em-normandie.fr
+; end auth token

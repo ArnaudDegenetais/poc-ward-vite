@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-gradient-to-r from-blue-emn-dark via-blue-emn to-red-emn-mate  p-4 flex items-center justify-between w-full">
+    <nav class="bg-gradient-to-r from-blue-emn-dark via-blue-emn to-red-emn-mate  p-4 flex items-center justify-between w-full shadow-emn-global">
         <div class="bg-gradient-to-r from-red-emn-mate to-blue-emn-light p-4 rounded-lg">
                 <router-link class="flex text-white text-lg " to="/">
                     <img src="/images/logo/emn-logo-transparent.svg" alt="EMN Logo" class="h-8 mr-2" />

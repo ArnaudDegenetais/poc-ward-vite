@@ -1,8 +1,8 @@
 <template>
     <div class="grid justify-center">
-        <div class="w-full max-w-md px-2 py-16 sm:px-0">
+        <div class="w-full max-w-md px-2 py-16 sm:px-0 ">
             <TabGroup>
-                <TabList class="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
+                <TabList class="flex space-x-1 rounded-xl bg-blue-900/20 p-1 shadow-element">
                     <Tab as="template" v-slot="{ selected }">
                         <button
                             :class="[
@@ -52,6 +52,7 @@
                             'rounded-xl bg-blue-emn p-3 h-max-96',
                             'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                         ]"
+                        class="shadow-element"
                     >
                         <component :is="category.component" class="" />
                     </TabPanel>
@@ -60,7 +61,7 @@
         </div>
         <div class="flex space-x-4 w-4/5">
             <div
-                class="bg-white border border-gray-300 rounded-lg p-4 shadow-md flex-1"
+                class="bg-white border border-gray-300 rounded-lg p-4 shadow-element flex-1"
             >
                 <h2 class="text-xl font-bold mb-2">Admissibles</h2>
                 <p class="text-gray-700">
@@ -68,7 +69,7 @@
                 </p>
             </div>
             <div
-                class="bg-white border border-gray-300 rounded-lg p-4 shadow-md flex-1"
+                class="bg-white border border-gray-300 rounded-lg p-4 shadow-element flex-1"
             >
                 <h2 class="text-xl font-bold mb-2">Parcours Carrière</h2>
                 <p class="text-gray-700">
