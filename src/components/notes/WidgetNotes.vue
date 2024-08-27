@@ -1,53 +1,72 @@
 <template>
     <div class="grid justify-center">
         <div class="w-full max-w-md px-2 py-16 sm:px-0">
-          <h1 class="text-center text-white p-6">2023-2024</h1>
-            <div v-for="year in notes" :key="year.year">
-                <div v-if="year.year === '2023-2024'">
-                    <Disclosure v-slot="{ open }">
-                        <DisclosureButton
-                            class="flex w-full justify-between rounded-lg bg-purple-100 px-4 py-2 text-left text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500/75"
-                        >
-                            {{ year.subject }}
-                        </DisclosureButton>
-                        <transition
-                            enter-active-class="transition duration-100 ease-out"
-                            enter-from-class="transform scale-95 opacity-0"
-                            enter-to-class="transform scale-100 opacity-100"
-                            leave-active-class="transition duration-75 ease-out"
-                            leave-from-class="transform scale-100 opacity-100"
-                            leave-to-class="transform scale-95 opacity-0"
-                        >
-                            <DisclosurePanel
-                                class="px-4 pb-2 pt-4 text-sm text-gray-500"
-                            >
-                                <div
-                                    v-for="grade in year.grades"
-                                    :key="grade.semester"
-                                >
-                                    <div v-if="grade.semester === 'Semester 2'">
-                                        <p>
-                                            Continuous Assessment:
-                                            {{ grade.continuous_assessment }}
-                                        </p>
-                                        <p v-if="grade.exam">
-                                            Exam: {{ grade.exam }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </DisclosurePanel>
-                        </transition>
-                    </Disclosure>
-                </div>
+            <div v-if="loadingNotes" class="spinner"></div>
+            <!-- <div v-if="!loadingNotes && !storeGrades.grades">  </div> -->
+            <div v-else>
+                <n-tabs type="segment" animated>
+                    <n-tab-pane
+                        v-for="grade in storeGrades.grades"
+                        :key="grade.id"
+                        :name="grade.period"
+                        :tab="grade.period"
+                    >
+                        <n-collapse v-for="subject in grade.subjects" :key="subject.id">
+                            <n-collapse-item :title="subject.label">
+                                <n-collapse v-for="score in subject.scores" :key="score.id">
+                                    <n-collapse-item :title="score.label">
+                                        {{ score.value }}
+                                    </n-collapse-item>
+                                </n-collapse>
+                            </n-collapse-item>
+                        </n-collapse>
+                    </n-tab-pane>
+                </n-tabs>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import studentNotes from '@/plugins/studentNotes'
+import { ref, onMounted } from 'vue'
+import { NTabs, NTabPane } from 'naive-ui'
+import { NCollapse, NCollapseItem, NCollapseTransition } from 'naive-ui';
+import { useGradesStore } from '@/stores/api/gradesStore'
 
-const notes = ref(studentNotes.student.total_grades)
+const loadingNotes = ref(false)
+const storeGrades = useGradesStore()
+
+const fetchGrades = async () => {
+    await storeGrades.getTranscripts()
+    console.log('store.grades', storeGrades.grades)
+    events.value = storeGrades.grades
+}
+
+onMounted(async () => {
+    try {
+        loadingNotes.value = true
+        await fetchGrades()
+        loadingNotes.value = false
+    } catch (error) {
+        console.error('Error on Mounted in fetching datas', error)
+    }
+})
 </script>
+
+<style>
+.spinner {
+   width: 56px;
+   height: 56px;
+   border-radius: 50%;
+   background: radial-gradient(farthest-side,#81829d 94%,#0000) top/9px 9px no-repeat,
+          conic-gradient(#0000 30%,#81829d);
+   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+   animation: spinner-c7wet2 1s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+   100% {
+      transform: rotate(1turn);
+   }
+}
+</style>

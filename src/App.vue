@@ -1,17 +1,17 @@
 <template>
-        <div v-if="userStore.isAuthenticated" class="grid grid-rows-12 h-full bg-slate-300">
-            <div class="row-span-1 col-span-12 z-40">
+        <n-layout position="aboslute" v-if="userStore.isAuthenticated" class="bg-blue-emn">
+            <n-layout-header style="box-shadow: inset 3px 3px 4px 4px rgb(0 0 0 / 0.4); border-radius: 5%;">
                 <TheTopNavigation />
-            </div>
-            <div class="row-span-11 col-span-12 grid grid-cols-12 z-0">
-                <div class="col-span-2">
-                    <TheLeftNavigation class="h-90" />
-                </div>
-                <div class="col-span-10">
+            </n-layout-header>
+            <n-layout has-sider bordered>
+                <n-layout-sider :width="200" >
+                    <TheLeftNavigation />
+                </n-layout-sider>
+                <n-layout-content >
                     <router-view :key="$route.path" />
-                </div>
-            </div>
-        </div>
+                </n-layout-content>
+            </n-layout>
+        </n-layout>
         <div v-else>
             <HomeLoading />
         </div>
@@ -25,6 +25,7 @@ import TheTopNavigation from '@/components/navigation/TheTopNavigation.vue'
 import TheLeftNavigation from '@/components/navigation/TheLeftNavigation.vue'
 import HomeLoading from './components/login/HomeLoading.vue';
 import { signIn } from '@/auth/authService'
+import { NLayout, NLayoutContent, NLayoutHeader, NLayoutSider } from 'naive-ui';
 
 const userStore = useUserStore();
 // const authError = ref(null);
@@ -33,3 +34,9 @@ onMounted( async () => {
     await signIn();
 });
 </script>
+
+<style>
+.n-layout{
+    background-color: #06166b;
+}
+</style>

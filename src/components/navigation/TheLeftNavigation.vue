@@ -1,56 +1,41 @@
 <template>
-    <div
-        v-if="userStore.userRoles.includes('BackOffice.Administrator')"
-        class="mx-auto flex min-h-screen max-w-screen-sm"
-    >
+    <div class="min-h-screen bg-blue-emn border-r">
         <div
-            class="h-full w-full rounded-lg bg-gradient-to-b from-green-700 via-green-500 to-white-500 p-2"
+            v-if="userStore.userRoles.includes('BackOffice.Administrator')"
+            v-for="item in employeeNavigationContent"
+            :key="item.title"
+            class="text-center p-8"
         >
-            <div class="h-full w-full bg-blue-emn rounded-lg">
-                <div
-                    v-for="item in employeeNavigationContent"
-                    :key="item.title"
-                    class="text-center p-8"
+            <div class="flex items-center justify-center space-x-2">
+                <GGIcons
+                    class="block sm:hidden"
+                    :name="item.icon"
+                    color="white"
+                />
+                <router-link
+                    class="hidden sm:block text-white"
+                    :to="item.path"
+                    >{{ item.title }}</router-link
                 >
-                    <div class="flex items-center justify-center space-x-2">
-                        <GGIcons
-                            class="block sm:hidden"
-                            :name="item.icon"
-                            color="white"
-                        />
-                        <router-link
-                            class="hidden sm:block text-white"
-                            :to="item.path"
-                            >{{ item.title }}</router-link
-                        >
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-    <div v-else class="mx-auto flex min-h-screen max-w-screen-sm">
         <div
-            class="h-full w-full rounded-lg bg-gradient-to-b from-red-emn-logo via-red-emn-mate to-white-500 p-2 shadow-emn-global"
+            v-else
+            v-for="item in studentNavigationContent"
+            :key="item.title + item.path"
+            class="text-center p-8"
         >
-            <div class="h-full w-full bg-blue-emn rounded-lg">
-                <div
-                    v-for="item in studentNavigationContent"
-                    :key="item.title + item.path"
-                    class="text-center p-8"
+            <div class="flex items-center justify-center">
+                <GGIcons
+                    class="block sm:hidden"
+                    :name="item.icon"
+                    color="white"
+                />
+                <router-link
+                    class="hidden sm:block text-white"
+                    :to="item.path"
+                    >{{ item.title }}</router-link
                 >
-                    <div class="flex items-center justify-center">
-                        <GGIcons
-                            class="block sm:hidden"
-                            :name="item.icon"
-                            color="white"
-                        />
-                        <router-link
-                            class="hidden sm:block text-white"
-                            :to="item.path"
-                            >{{ item.title }}</router-link
-                        >
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -58,7 +43,7 @@
 
 <script setup>
 import { useUserStore } from '@/stores/userStore'
-import { ref, computed } from 'vue';
+import { ref, computed } from 'vue'
 import { GGIcons } from 'vue-css.gg'
 import { useI18n } from 'vue-i18n'
 
@@ -71,7 +56,7 @@ const studentNavigationContent = computed(() => [
     { title: t('navigation.absences'), path: '/absences', icon: 'timer' },
     { title: t('navigation.news'), path: '/news', icon: 'board' },
 ])
-const employeeNavigationContent = computed( () => [
+const employeeNavigationContent = computed(() => [
     {
         title: t('features.rooms-schedule'),
         path: '/agenda',

@@ -18,24 +18,29 @@ export const useGradesStore = defineStore('grades', () => {
     }
 
     async function fetchTranscripts() {
-        const token = await getTokenIfNot()
-        if (!token) {
-            console.error('Failed to get access token')
-            return
-        }
-        return httpApim.get(
-            'https://wardbackend-staging.em-normandie.fr/transcripts',
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+        try {
+            const token = await getTokenIfNot()
+            if (!token) {
+                console.error('Failed to get access token')
+                return
             }
-        )
+            return httpApim.get(
+                'https://wardbackend-staging.em-normandie.fr/transcripts',
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+        } catch (error) {
+            console.error('Error fetching grades', error)
+            return null
+        }
     }
 
     const getTranscripts = async () => {
         const response = await fetchTranscripts()
-        if (response) {
+        if (response && response.data) {
             grades.value = response.data
             console.log('grades', grades.value)
             console.log('response TRANSCRIPTS ', response)

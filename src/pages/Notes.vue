@@ -43,9 +43,13 @@ const fetchGrades = async () => {
 }
 
 onMounted(async () => {
-    loadingNotes.value = true
-    await fetchGrades()
-    loadingNotes.value = false
+        try {
+        loadingNotes.value = true
+        await fetchGrades()
+        loadingNotes.value = false
+    } catch (error) {
+        console.error('Error on Mounted in fetching datas', error)
+    }
 })
 </script>
 
