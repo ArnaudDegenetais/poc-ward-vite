@@ -12,6 +12,7 @@
         "@azure/msal-browser": "^3.20.0",
         "@headlessui/vue": "^1.7.22",
         "@jamescoyle/vue-icon": "^0.1.2",
+        "@mdi/font": "^7.4.47",
         "@mdi/js": "^7.4.47",
         "@tinymce/tinymce-vue": "^6.0.1",
         "@ward/library": "^42.0.2",

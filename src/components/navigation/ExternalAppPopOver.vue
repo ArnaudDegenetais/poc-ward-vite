@@ -1,55 +1,96 @@
 <template>
-    <Popover v-slot="{ open }" class="relative">
-        <PopoverButton
-            :class="open ? 'text-white' : 'text-white/90'"
-            class="group inline-flex items-center rounded-full bg-black/20 px-3 py-2 text-base font-medium hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-        >
-            <GGIcons name="menu-grid-o" color="white" />
-        </PopoverButton>
-
-        <transition
-            enter-active-class="transition duration-200 ease-out"
-            enter-from-class="translate-y-1 opacity-0"
-            enter-to-class="translate-y-0 opacity-100"
-            leave-active-class="transition duration-150 ease-in"
-            leave-from-class="translate-y-0 opacity-100"
-            leave-to-class="translate-y-1 opacity-0"
-        >
-            <PopoverPanel
-                class="absolute left-1/2 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl"
-            >
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-                    <div v-for="element in externalElements" :key="element.id" class="flex items-center p-3 border border-gray-300 rounded-lg bg-white hover:bg-gray-50">
-                        <GGIcons :name="element.icon" color="black" />
-                        <div class="ml-4 text-base font-medium text-gray-900">
+    <v-menu>
+        <template v-slot:activator="{ props }">
+            <v-btn v-bind="props" :icon="mdiDotsGrid">
+                <span
+                    class="rounded-full bg-black/20 pl-2 pr-2 pt-2 pb-2 text-xl text-white"
+                >
+                    <v-icon :icon="mdiDotsGrid" />
+                </span>
+            </v-btn>
+        </template>
+        <v-card>
+            <v-row>
+                <v-col
+                    v-for="element in externalElements"
+                    :key="element.id"
+                    cols="12"
+                    sm="4"
+                    style="padding: 2em;"
+                >
+                    <a :href="element.path" target="_blank">
+                        <v-btn
+                            class="rounded-lg"
+                            color="#4f545c"
+                            dark
+                            block
+                            :prepend-icon="element.icon"
+                        >
                             {{ element.label }}
-                        </div>
-                    </div>
-                </div>
-            </PopoverPanel>
-        </transition>
-    </Popover>
+                        </v-btn>
+                    </a>
+                </v-col>
+            </v-row>
+        </v-card>
+    </v-menu>
 </template>
 
 <script setup>
 import { signOut } from '@/auth/authService'
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiSchool, mdiHandshake, mdiHomeCity, mdiDesktopClassic, mdiTextBoxSearch, mdiFolderNetwork, mdiCastEducation, mdiBriefcase, mdiCircleDouble, mdiDotsGrid } from '@mdi/js'
 import { GGIcons } from 'vue-css.gg'
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
+import { md } from 'vuetify/iconsets/md';
 
 const externalElements = [
-    { id: 1, label: 'Upward', icon: 'comment', path: 'https://upward.em-normandie.fr/' },
-    { id: 2, label: 'Parcours Carrière', icon: 'profile', path: '/profile' },
-    { id: 3, label: 'VM', icon: 'settings', path: '/settings' },
-    { id: 4, label: 'housing', icon: 'logout', path: '/logout' },
-    { id: 5, label: 'GED', icon: 'logout', path: '/confidentialité' },
-    { id: 6, label: 'Mes documents', icon: 'logout', path: '/confidentialité' },
+    {
+        id: 1,
+        label: 'Upward',
+        icon: mdiSchool,
+        path: 'https://upward.em-normandie.fr/',
+    },
+    {
+        id: 2,
+        label: 'Parcours Carrière',
+        icon: mdiHandshake,
+        path: 'https://upward.em-normandie.fr/local/pages/carriere-fr',
+    },
+    {
+        id: 3,
+        label: 'VM',
+        icon: mdiDesktopClassic,
+        path: 'https://client.wvd.microsoft.com/arm/webclient/index.html',
+    },
+    { id: 4, label: 'housing', icon: mdiHomeCity, path: '/logout' },
+    {
+        id: 5,
+        label: 'GED',
+        icon: mdiTextBoxSearch,
+        path: 'https://emnormandie1-my.sharepoint.com/',
+    },
+    {
+        id: 6,
+        label: 'Mes documents',
+        icon: mdiFolderNetwork,
+        path: 'https://emnormandie1-my.sharepoint.com/',
+    },
     {
         id: 7,
         label: 'Learning center',
-        icon: 'logout',
-        path: '/confidentialité',
+        icon: mdiCastEducation,
+        path: 'https://lc.em-normandie.fr/',
     },
-    { id: 8, label: 'Job teaser', icon: 'logout', path: '/confidentialité' },
-    { id: 9, label: 'Alumni', icon: 'logout', path: '/confidentialité' },
+    {
+        id: 8,
+        label: 'Job teaser',
+        icon: mdiBriefcase,
+        path: 'https://connect.jobteaser.com/?client_id=e500827d-07fc-4766-97b4-4f960a2835e7&entity_cc_name=Espace+Carri%C3%A8res&entity_color=%23df020e&entity_logo=https%3A%2F%2Fd1guu6n8gz71j.cloudfront.net%2Fsystem%2Fasset%2Flogos%2F7180276%2Flogo.png%3F1693823862&entity_name=EM+Normandie&nonce=db0f2e2f7fbd61a615535f708ce4ea8f&organization_domain=em-normandie&redirect_uri=https%3A%2F%2Fem-normandie.jobteaser.com%2Fusers%2Fauth%2Fconnect%2Fcallback&response_type=code&scope=openid+email+profile+groups+urn%3Aconnect%3Ajobteaser%3Acom%3Aorganization+urn%3Aconnect%3Ajobteaser%3Acom%3Aextra_attributes&state=32a39685c5155d08b46c6402a45da4f3&ui_locales=fr',
+    },
+    {
+        id: 9,
+        label: 'Alumni',
+        icon: mdiCircleDouble,
+        path: 'https://alumni.emnormandie.com/fr/',
+    },
 ]
 </script>
