@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-blue-emn border-r">
+    <div class="min-h-screen overflow-hidden bg-blue-emn border-r">
         <div
             v-if="userStore.userRoles.includes('BackOffice.Administrator')"
             v-for="item in employeeNavigationContent"

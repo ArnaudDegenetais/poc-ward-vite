@@ -37,7 +37,7 @@ import { GGIcons } from 'vue-css.gg'
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
 
 const externalElements = [
-    { id: 1, label: 'Upward', icon: 'comment', path: '/notes' },
+    { id: 1, label: 'Upward', icon: 'comment', path: 'https://upward.em-normandie.fr/' },
     { id: 2, label: 'Parcours Carrière', icon: 'profile', path: '/profile' },
     { id: 3, label: 'VM', icon: 'settings', path: '/settings' },
     { id: 4, label: 'housing', icon: 'logout', path: '/logout' },

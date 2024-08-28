@@ -3,7 +3,7 @@
         <div class="w-full max-w-md px-2 py-16 sm:px-0">
             <div v-if="loadingNotes" class="spinner"></div>
             <div v-else>
-                <n-tabs type="segment" animated>
+                <n-tabs type="segment" animated >
                     <n-tab-pane
                         v-for="grade in storeGrades.grades"
                         :key="grade.id"
@@ -11,9 +11,9 @@
                         :tab="grade.period"
                     >
                         <n-collapse v-for="subject in grade.subjects" :key="subject.id">
-                            <n-collapse-item :title="subject.label">
-                                <n-collapse v-for="score in subject.scores" :key="score.id">
-                                    <n-collapse-item :title="score.label">
+                            <n-collapse-item color="#8a2be2" :title="subject.label">
+                                <n-collapse color="#8a2be2" v-for="score in subject.scores" :key="score.id">
+                                    <n-collapse-item color="#8a2be2" :title="score.label">
                                         {{ score.value }}
                                     </n-collapse-item>
                                 </n-collapse>
@@ -68,5 +68,9 @@ onMounted(async () => {
    100% {
       transform: rotate(1turn);
    }
+}
+
+.n-collapse, .n-collapse-item {
+    color: white;
 }
 </style>

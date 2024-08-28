@@ -7,6 +7,17 @@ import FR from './i18n/fr.json'
 import App from '@/App.vue'
 import '@/index.css'
 
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+    components,
+    directives,
+})
+
 const i18n = createI18n({
     legacy: false, // you must set `false`, to use Composition API
     globalInjection: true,
@@ -20,4 +31,4 @@ const i18n = createI18n({
 
 const pinia = createPinia()
 
-createApp(App).use(i18n).use(pinia).use(router).mount('#app')
+createApp(App).use(vuetify).use(i18n).use(pinia).use(router).mount('#app')

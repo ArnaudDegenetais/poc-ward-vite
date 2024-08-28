@@ -1,62 +1,84 @@
 <template>
     <div class="">
-            <TabGroup>
-                <TabList class="flex space-x-1 rounded-xl bg-blue-900/20 p-1 shadow-emn-global">
-                    <Tab as="template" v-slot="{ selected }">
-                        <button
-                            :class="[
-                                'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-                                'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                                selected
-                                    ? 'bg-blue-emn text-white shadow'
-                                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
-                            ]"
-                        >
-                            {{ t('navigation.agenda') }}
-                        </button>
-                    </Tab>
-                    <Tab as="template" v-slot="{ selected }">
-                        <button
-                            :class="[
-                                'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-                                'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                                selected
-                                    ? 'bg-blue-emn text-white shadow'
-                                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
-                            ]"
-                        >
-                            {{ t('navigation.grades') }}
-                        </button>
-                    </Tab>
-                    <Tab as="template" v-slot="{ selected }">
-                        <button
-                            :class="[
-                                'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
-                                'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
-                                selected
-                                    ? 'bg-blue-emn text-white shadow'
-                                    : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
-                            ]"
-                        >
-                            {{ t('navigation.news') }}
-                        </button>
-                    </Tab>
-                </TabList>
-
-                <TabPanels class="mt-3">
-                    <TabPanel
-                        v-for="(category, idx) in Object.values(categories)"
-                        :key="idx"
+        <v-card>
+            <v-tabs v-model="tab" align-tabs="center">
+                <v-tab value="one">{{ t('navigation.agenda') }}</v-tab>
+                <v-tab value="two">{{ t('navigation.grades') }}</v-tab>
+                <v-tab value="three">{{ t('navigation.news') }}</v-tab>
+            </v-tabs>
+            <v-card-text>
+                <v-tabs-window v-model="tab">
+                    <v-tabs-window-item value="one">
+                        <WidgetCaldendar />
+                    </v-tabs-window-item>
+                    <v-tabs-window-item value="two">
+                        <WidgetNotes />
+                    </v-tabs-window-item>
+                    <v-tabs-window-item value="three">
+                        <WidgetNews />
+                    </v-tabs-window-item>
+                </v-tabs-window>
+            </v-card-text>
+        </v-card>
+        <TabGroup>
+            <TabList
+                class="flex space-x-1 rounded-xl bg-blue-900/20 p-1 shadow-emn-global"
+            >
+                <Tab as="template" v-slot="{ selected }">
+                    <button
                         :class="[
-                            'rounded-xl bg-blue-emn p-3 h-max-96',
+                            'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
                             'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                            selected
+                                ? 'bg-blue-emn text-white shadow'
+                                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
                         ]"
-                        class="shadow-emn-global"
                     >
-                        <component :is="category.component" class="" />
-                    </TabPanel>
-                </TabPanels>
-            </TabGroup>
+                        {{ t('navigation.agenda') }}
+                    </button>
+                </Tab>
+                <Tab as="template" v-slot="{ selected }">
+                    <button
+                        :class="[
+                            'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                            'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                            selected
+                                ? 'bg-blue-emn text-white shadow'
+                                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
+                        ]"
+                    >
+                        {{ t('navigation.grades') }}
+                    </button>
+                </Tab>
+                <Tab as="template" v-slot="{ selected }">
+                    <button
+                        :class="[
+                            'w-full rounded-lg py-2.5 text-sm font-medium leading-5',
+                            'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                            selected
+                                ? 'bg-blue-emn text-white shadow'
+                                : 'text-blue-100 hover:bg-white/[0.12] hover:text-white',
+                        ]"
+                    >
+                        {{ t('navigation.news') }}
+                    </button>
+                </Tab>
+            </TabList>
+
+            <TabPanels class="mt-3">
+                <TabPanel
+                    v-for="(category, idx) in Object.values(categories)"
+                    :key="idx"
+                    :class="[
+                        'rounded-xl bg-blue-emn p-3 h-max-96',
+                        'ring-white/60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                    ]"
+                    class="shadow-emn-global"
+                >
+                    <component :is="category.component" class="" />
+                </TabPanel>
+            </TabPanels>
+        </TabGroup>
     </div>
 </template>
 
@@ -70,6 +92,7 @@ import WidgetNotes from '../notes/WidgetNotes.vue'
 import WidgetNews from '../news/WidgetNews.vue'
 
 const { t } = useI18n()
+const tab = ref(null)
 
 const categories = computed(() => {
     return {
